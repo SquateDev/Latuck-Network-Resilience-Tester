@@ -30,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityDDos.DDosMenu"
+        <activity android:name=".Activity.ActivityTEST"
             tools:ignore="Instantiatable">
         </activity>
     </application>

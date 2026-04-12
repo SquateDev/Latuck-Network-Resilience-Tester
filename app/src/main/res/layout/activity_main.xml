@@ -48,7 +48,7 @@
             android:id="@+id/Source"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="228dp"
+            android:layout_marginBottom="284dp"
             android:background="@drawable/drawable_button"
             android:fontFamily="sans-serif-black"
             android:text="Source"
@@ -60,29 +60,13 @@
             tools:ignore="HardcodedText" />
 
         <Button
-            android:id="@+id/json"
+            android:id="@+id/tester_a"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/drawable_button"
             android:fontFamily="sans-serif-black"
-            android:text="Settings"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/ddos"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.86"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/ddos"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="28dp"
-            android:background="@drawable/drawable_button"
-            android:fontFamily="sans-serif-black"
-            android:text="DDos"
+            android:text="TEST"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/Source"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,29 +93,15 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:tintMode="src_atop"
-            app:layout_constraintBottom_toBottomOf="@+id/ddos"
-            app:layout_constraintEnd_toEndOf="@+id/ddos"
+            app:layout_constraintBottom_toBottomOf="@+id/tester_a"
+            app:layout_constraintEnd_toEndOf="@+id/tester_a"
             app:layout_constraintHorizontal_bias="0.059"
-            app:layout_constraintStart_toStartOf="@+id/ddos"
-            app:layout_constraintTop_toTopOf="@+id/ddos"
+            app:layout_constraintStart_toStartOf="@+id/tester_a"
+            app:layout_constraintTop_toTopOf="@+id/tester_a"
             app:layout_constraintVertical_bias="0.48"
             app:srcCompat="@drawable/ddos"
             app:tint="#FFFFFF"
             tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:tint="#FFFFFF"
-            android:tintMode="src_atop"
-            app:layout_constraintBottom_toBottomOf="@+id/json"
-            app:layout_constraintEnd_toEndOf="@+id/json"
-            app:layout_constraintHorizontal_bias="0.059"
-            app:layout_constraintStart_toStartOf="@+id/json"
-            app:layout_constraintTop_toTopOf="@+id/json"
-            app:layout_constraintVertical_bias="0.56"
-            app:srcCompat="@drawable/data_object"
-            tools:ignore="ContentDescription,UseAppTint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

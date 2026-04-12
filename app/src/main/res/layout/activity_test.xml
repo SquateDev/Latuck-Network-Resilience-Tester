@@ -191,107 +191,17 @@
 
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/buttonsContainer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardDelay">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:layout_weight="1"
-                        app:cardBackgroundColor="#4CAF50"
-                        app:cardCornerRadius="50dp"
-                        app:cardElevation="6dp">
-
-                        <Button
-                            android:id="@+id/buttonStart"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:background="@android:color/transparent"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="START"
-                            android:textAllCaps="false"
-                            android:textColor="#FFFFFF"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        app:cardBackgroundColor="#FF9800"
-                        app:cardCornerRadius="50dp"
-                        app:cardElevation="6dp">
-
-                        <Button
-                            android:id="@+id/buttonPortAuto"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:background="@android:color/transparent"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="AUTO"
-                            android:textAllCaps="false"
-                            android:textColor="#FFFFFF"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="#9C27B0"
-                    app:cardCornerRadius="50dp"
-                    app:cardElevation="6dp">
-
-                    <Button
-                        android:id="@+id/buttonProxy"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="PROXY"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/statusCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="#1A1520"
                 app:cardCornerRadius="50dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonsContainer">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:id="@+id/statusText"
@@ -306,6 +216,23 @@
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/buttonStart"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="START"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/statusCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardDelay"
+                app:layout_constraintVertical_bias="0.949" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

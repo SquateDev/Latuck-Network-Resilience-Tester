@@ -31,14 +31,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import dev.squatedev.latuckddos.ActivityDDos.DDosMenu;
+import dev.squatedev.latuckddos.Activity.ActivityTEST;
 
 public class MainActivity extends AppCompatActivity {
     private AlertDialog permissionDialog;
     private boolean hasPermission = false;
     private boolean okay = false;
-    private Button btn1, btn2, btn3;
-    private final String url = "https://github.com/SquateDev/ToolChest-PocketEdition-Launcher";
+    private Button btn2, btn3;
+    private final String url = "https://github.com/SquateDev/Latuck-Network-Resilience-Tester";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        btn1 = findViewById(R.id.json);
-        btn2 = findViewById(R.id.ddos);
+        btn2 = findViewById(R.id.tester_a);
         btn3 = findViewById(R.id.Source);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -170,8 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void start() {
-        btn1.setOnClickListener(v -> startActivity(new Intent(this, DDosMenu.class)));
-        btn2.setOnClickListener(v -> startActivity(new Intent(this, DDosMenu.class)));
+        btn2.setOnClickListener(v -> startActivity(new Intent(this, ActivityTEST.class)));
         btn3.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
