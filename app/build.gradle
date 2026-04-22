@@ -9,7 +9,8 @@ android {
     defaultConfig {
         applicationId "dev.squatedev.latuckddos"
         minSdk 26
-        targetSdk 36
+        //noinspection ExpiredTargetSdkVersion,OldTargetApi
+        targetSdk 29
         versionCode 1
         versionName "1.0"
     }

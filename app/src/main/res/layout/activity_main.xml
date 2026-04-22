@@ -5,74 +5,77 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#100D13"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/linear_osnova"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-black"
-            android:letterSpacing=".08"
-            android:text="LatuckDDos"
-            android:textColor="#a1a1a1"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center_horizontal"
+            android:text="LatuckDDOS"
+            android:textColor="#B2DFDB"
+            android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#141118"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0">
+        <Button
+            android:id="@+id/donation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/drawable_button"
+            android:fontFamily="sans-serif-black"
+            android:text="Donation"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#E61616"
+            android:textColorHint="#BD3333"
+            app:layout_constraintBottom_toTopOf="@+id/Source"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/Source"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="284dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/drawable_button"
             android:fontFamily="sans-serif-black"
             android:text="Source"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintEnd_toStartOf="@+id/tester_a"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/tester_a"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/drawable_button"
             android:fontFamily="sans-serif-black"
-            android:text="TEST"
+            android:text="Attack"
             android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/Source"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintStart_toEndOf="@+id/Source" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -100,6 +103,21 @@
             app:layout_constraintTop_toTopOf="@+id/tester_a"
             app:layout_constraintVertical_bias="0.48"
             app:srcCompat="@drawable/ddos"
+            app:tint="#FFFFFF"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/donation"
+            app:layout_constraintEnd_toEndOf="@+id/donation"
+            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintStart_toStartOf="@+id/donation"
+            app:layout_constraintTop_toTopOf="@+id/donation"
+            app:layout_constraintVertical_bias="0.48"
+            app:srcCompat="@drawable/donation"
             app:tint="#FFFFFF"
             tools:ignore="ContentDescription" />
 

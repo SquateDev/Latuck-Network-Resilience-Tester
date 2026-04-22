@@ -1,25 +1,13 @@
-/*________________________________________________*//*
-
-
-               Author: @Squatedev
-               age: 19
-               name: null
-
-
-/*________________________________________________*/
-
 package dev.squatedev.latuckddos;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,11 +22,21 @@ import androidx.core.view.WindowInsetsCompat;
 import dev.squatedev.latuckddos.Activity.ActivityTEST;
 
 public class MainActivity extends AppCompatActivity {
-    private AlertDialog permissionDialog;
-    private boolean hasPermission = false;
-    private boolean okay = false;
-    private Button btn2, btn3;
+    private Button btn2, btn3, donation_btn;
     private final String url = "https://github.com/SquateDev/Latuck-Network-Resilience-Tester";
+    private boolean notificationPermissionGranted = false;
+
+    private final ActivityResultLauncher<String> notificationPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            isGranted -> {
+                notificationPermissionGranted = isGranted;
+                if (isGranted) {
+                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    showPermissionDeniedDialog();
+                }
+                start();
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn2 = findViewById(R.id.tester_a);
         btn3 = findViewById(R.id.Source);
+        donation_btn = findViewById(R.id.donation);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -55,134 +54,66 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        checkPermission();
+        checkNotificationPermission();
     }
 
-    private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
-            new ActivityResultContracts.RequestMultiplePermissions(),
-            permissions -> {
-                boolean allGranted = permissions.get(Manifest.permission.READ_EXTERNAL_STORAGE) == Boolean.TRUE;
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    allGranted = allGranted && permissions.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == Boolean.TRUE;
-                }
-                if (allGranted) {
-                    hasPermission = true;
-                    dismissDialog();
-                    start();
+    private void checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                notificationPermissionGranted = true;
+                start();
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+                    showPermissionRationaleDialog();
                 } else {
-                    showPermissionDialog();
+                    notificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
                 }
-            });
-
-
-    private final ActivityResultLauncher<Intent> manageStorageLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (Environment.isExternalStorageManager()) {
-                        hasPermission = true;
-                        dismissDialog();
-                        start();
-                    } else {
-                        showPermissionDialog();
-                    }
-                }
-            });
-
-
-
-    private void dismissDialog() {
-        if (permissionDialog != null && permissionDialog.isShowing()) {
-            permissionDialog.dismiss();
-            permissionDialog = null;
-        }
-    }
-
-    @SuppressLint("ObsoleteSdkInt")
-    private void checkPermission() {
-        if (hasPermission) {
-            start();
-            return;
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (Environment.isExternalStorageManager()) {
-                hasPermission = true;
-                start();
-            } else {
-                requestManageStorage();
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                hasPermission = true;
-                start();
-            } else {
-                requestPermissions();
             }
         } else {
-            hasPermission = true;
+            notificationPermissionGranted = true;
             start();
         }
     }
 
-    private void requestManageStorage() {
-        permissionDialog = new AlertDialog.Builder(this)
-                .setTitle("Доступ к хранилищу")
-                .setMessage("Для работы приложения необходимо разрешение на доступ к файлам")
-                .setPositiveButton("Разрешить", (dialog, which) -> {
-                    dismissDialog();
-                    okay = true;
-                    @SuppressLint("InlinedApi") Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                    intent.setData(Uri.parse("package:" + getPackageName()));
-                    manageStorageLauncher.launch(intent);
+    private void showPermissionRationaleDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Notification Permission")
+                .setMessage("This app needs notification permission to show attack progress.")
+                .setPositiveButton("Grant", (dialog, which) ->
+                        notificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS))
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                    notificationPermissionGranted = false;
+                    start();
                 })
-                .setNegativeButton("Выйти", (dialog, which) -> finish())
-                .setCancelable(false)
                 .show();
     }
 
-    private void requestPermissions() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-            permissionLauncher.launch(new String[]{
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            });
-        } else {
-            permissionLauncher.launch(new String[]{
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-            });
-        }
-    }
-
-    private void showPermissionDialog() {
-        permissionDialog = new AlertDialog.Builder(this)
-                .setTitle("Доступ не получен")
-                .setMessage("Без доступа к файлам приложение не может работать")
-                .setPositiveButton("Попробовать снова", (dialog, which) -> {
-                    dismissDialog();
-                    checkPermission();
-                    okay = true;
+    private void showPermissionDeniedDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Permission Denied")
+                .setMessage("Notifications are disabled. Enable them in settings?")
+                .setPositiveButton("Settings", (dialog, which) -> {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.setData(Uri.parse("package:" + getPackageName()));
+                    startActivity(intent);
                 })
-                .setNegativeButton("Выйти", (dialog, which) -> finish())
-                .setCancelable(false)
+                .setNegativeButton("Cancel", null)
                 .show();
     }
 
     private void start() {
         btn2.setOnClickListener(v -> startActivity(new Intent(this, ActivityTEST.class)));
+
         btn3.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!hasPermission && okay) {
-            checkPermission();
-            okay = false;
-        }
+        donation_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://www.donationalerts.com/r/derzai"));
+            startActivity(intent);
+        });
     }
 }
