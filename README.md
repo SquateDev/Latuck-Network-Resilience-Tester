@@ -21,10 +21,6 @@
 
 **Latuck Network Resilience Tester** — это профессиональный инструмент для нагрузочного тестирования и проверки устойчивости ваших собственных серверов и сайтов к DDoS-атакам.
 
-<div align="center">
-  <img src="https://via.placeholder.com/800x400/1a1a2e/ff4757?text=Latuck+DDOS+Interface" alt="App Interface" width="80%">
-</div>
-
 <br>
 
 ## ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ
